@@ -1,0 +1,54 @@
+.vertical-center {
+  min-height: 100%; /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.alert {
+  padding: 5px;
+}
+
+#batman {
+  background-image: url("https://images8.alphacoders.com/601/thumb-1920-601994.jpg");
+  background-size: cover;
+}
+
+label {
+  color: white;
+}
+
+.form-submit-button {
+  background: #606264;
+  color: #fff;
+  border: 1px solid #eee;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px #eee;
+  text-shadow: none;
+}
+
+.form-submit-button:hover {
+  background: #1e1e1f;
+  color: #fff;
+  border: 1px solid #eee;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px #eee;
+  text-shadow: none;
+}
+
+input {
+  background: black;
+  box-shadow: 5px 5px 5px #eee;
+  border-radius: 20px;
+  color: grey;
+}
+
+input:focus {
+  background: black;
+  box-shadow: 5px 5px 5px #eee;
+}

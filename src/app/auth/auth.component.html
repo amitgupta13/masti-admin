@@ -1,0 +1,53 @@
+<div id="batman" class="jumbotron vertical-center">
+  <form
+    class="container col-md-4 col-sm-7 col-8"
+    [formGroup]="signinForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <!-- <div class="form-group"> -->
+    <small class="text-danger" role="alert">{{ error }}</small>
+    <!-- </div> -->
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        placeholder="Enter email"
+        formControlName="email"
+      />
+      <small
+        class="text-danger"
+        *ngIf="
+          signinForm.get('email').errors?.required &&
+          signinForm.get('email').touched
+        "
+      >
+        This field is required
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="exampleInputPassword1"
+        placeholder="Password"
+        formControlName="password"
+      />
+      <small
+        class="text-danger"
+        *ngIf="
+          signinForm.get('password').errors?.required &&
+          signinForm.get('password').touched
+        "
+      >
+        This field is required
+      </small>
+    </div>
+    <button type="submit" class="btn btn-primary form-submit-button">
+      Submit
+    </button>
+  </form>
+</div>
