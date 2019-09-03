@@ -24,31 +24,31 @@ label {
 }
 
 .form-submit-button {
-  background: #606264;
+  background: linear-gradient(black, grey);
   color: #fff;
   border: 1px solid #eee;
   border-radius: 20px;
-  box-shadow: 5px 5px 5px #eee;
+  box-shadow: 2px 2px 2px #eee;
   text-shadow: none;
 }
 
 .form-submit-button:hover {
-  background: #1e1e1f;
+  background: linear-gradient(grey, black);
   color: #fff;
   border: 1px solid #eee;
   border-radius: 20px;
-  box-shadow: 5px 5px 5px #eee;
+  box-shadow: 2px 2px 2px #eee;
   text-shadow: none;
 }
 
 input {
   background: black;
-  box-shadow: 5px 5px 5px #eee;
+  box-shadow: 2px 2px 2px #eee;
   border-radius: 20px;
   color: grey;
 }
 
 input:focus {
   background: black;
-  box-shadow: 5px 5px 5px #eee;
+  box-shadow: 2px 2px 2px #eee;
 }

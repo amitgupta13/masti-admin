@@ -1,1 +1,16 @@
-<h1>Ima working</h1>
+<div
+  class="container"
+  style="margin-top: 20px; margin-bottom: 20px; width:100%"
+>
+  <button class="btn btn-primary form-submit-button">Add New</button>
+</div>
+
+<cdk-virtual-scroll-viewport itemSize="100">
+  <li *cdkVirtualFor="let p of people" class="animated slideInRight">
+    <img class="adjust-img" [src]="p.image" alt="" />
+    <div class="heading-wrapper">
+      <h2>{{ p.name }}</h2>
+      <p>{{ p.bio }}</p>
+    </div>
+  </li>
+</cdk-virtual-scroll-viewport>

@@ -1,3 +1,8 @@
 .collapse:not(.show) {
   transition: 2s;
 }
+
+nav {
+  background-image: linear-gradient(black, grey);
+  box-shadow: 5px 5px 5px #eee;
+}
