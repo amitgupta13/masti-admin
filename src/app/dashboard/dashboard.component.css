@@ -53,3 +53,35 @@ cdk-virtual-scroll-viewport::-webkit-scrollbar-thumb {
 .heading-wrapper {
   display: inline-block;
 }
+
+li {
+  position: relative;
+}
+
+.test {
+  right: 20px;
+  position: absolute;
+  top: 60px;
+}
+
+input {
+  background: black;
+  box-shadow: 2px 2px 2px #eee;
+  border-radius: 20px;
+  color: white;
+  margin: 0 auto;
+  bottom: 20px;
+}
+
+input:focus {
+  background: black;
+  box-shadow: 2px 2px 2px #eee;
+  color: white;
+}
+
+.price {
+  position: absolute;
+  right: 25px;
+  top: 15px;
+  font-weight: 600;
+}

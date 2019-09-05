@@ -5,9 +5,10 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { DashboardRoutingModule } from "./dashboard-routing.module";
 import { ProductItemComponent } from "./product-item/product-item.component";
+import { FilterPipe } from "../pipes/filter.pipe";
 
 @NgModule({
-  declarations: [DashboardComponent, ProductItemComponent],
+  declarations: [DashboardComponent, ProductItemComponent, FilterPipe],
   imports: [
     CommonModule,
     ReactiveFormsModule,

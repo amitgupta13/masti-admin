@@ -5,12 +5,34 @@
   <button class="btn btn-primary form-submit-button">Add New</button>
 </div>
 
-<cdk-virtual-scroll-viewport itemSize="100">
-  <li *cdkVirtualFor="let p of people" class="animated slideInRight">
-    <img class="adjust-img" [src]="p.image" alt="" />
-    <div class="heading-wrapper">
-      <h2>{{ p.name }}</h2>
-      <p>{{ p.bio }}</p>
-    </div>
-  </li>
-</cdk-virtual-scroll-viewport>
+<input
+  type="text"
+  class="form-control col-md-9"
+  placeholder="Search..."
+  autocomplete="off"
+  (input)="searchList($event)"
+/>
+<ng-container *ngIf="products">
+  <cdk-virtual-scroll-viewport
+    itemSize="100"
+    (scrolledIndexChange)="nextBatch($event, products.length)"
+  >
+    <li
+      *cdkVirtualFor="let p of products; let i = index"
+      class="animated lightSpeedIn"
+    >
+      <img class="adjust-img" [src]="p.image" alt="" />
+      <div class="heading-wrapper">
+        <h2>{{ p.name }}</h2>
+        <span class="price">Price: {{ p.price }}</span>
+        <p>{{ p.description }}</p>
+      </div>
+      <div class="heading-wrapper test">
+        <button class="form-submit-button">Edit</button>
+        <button class="form-submit-button" (click)="deleteProduct(p.id)">
+          Delete
+        </button>
+      </div>
+    </li>
+  </cdk-virtual-scroll-viewport>
+</ng-container>
