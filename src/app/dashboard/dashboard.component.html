@@ -1,38 +1,41 @@
-<div
-  class="container"
-  style="margin-top: 20px; margin-bottom: 20px; width:100%"
->
-  <button class="btn btn-primary form-submit-button">Add New</button>
-</div>
+<div class="dash">
+  <div class="container" style="margin-bottom: 40px; width:100%">
+    <a routerLink="new">
+      <button class="btn btn-primary form-submit-button">Add New</button>
+    </a>
+  </div>
 
-<input
-  type="text"
-  class="form-control col-md-9"
-  placeholder="Search..."
-  autocomplete="off"
-  (input)="searchList($event)"
-/>
-<ng-container *ngIf="products">
-  <cdk-virtual-scroll-viewport
-    itemSize="100"
-    (scrolledIndexChange)="nextBatch($event, products.length)"
-  >
-    <li
-      *cdkVirtualFor="let p of products; let i = index"
-      class="animated lightSpeedIn"
+  <input
+    type="text"
+    class="form-control col-md-9"
+    placeholder="Search..."
+    autocomplete="off"
+    (change)="searchList($event)"
+  />
+  <ng-container *ngIf="products">
+    <cdk-virtual-scroll-viewport
+      itemSize="100"
+      (scrolledIndexChange)="nextBatch($event, products.length)"
     >
-      <img class="adjust-img" [src]="p.image" alt="" />
-      <div class="heading-wrapper">
-        <h2>{{ p.name }}</h2>
-        <span class="price">Price: {{ p.price }}</span>
-        <p>{{ p.description }}</p>
-      </div>
-      <div class="heading-wrapper test">
-        <button class="form-submit-button">Edit</button>
-        <button class="form-submit-button" (click)="deleteProduct(p._id)">
-          Delete
-        </button>
-      </div>
-    </li>
-  </cdk-virtual-scroll-viewport>
-</ng-container>
+      <li
+        *cdkVirtualFor="let p of products; let i = index"
+        class="animated lightSpeedIn"
+      >
+        <img class="adjust-img" [src]="p.image" alt="" />
+        <div class="heading-wrapper">
+          <h2>{{ p.name }}</h2>
+          <span class="price">Price: {{ p.price }}</span>
+          <p>{{ p.description }}</p>
+        </div>
+        <div class="heading-wrapper test">
+          <a [routerLink]="['edit', p._id]">
+            <button class="form-submit-button">Edit</button>
+          </a>
+          <button class="form-submit-button" (click)="deleteProduct(p._id)">
+            Delete
+          </button>
+        </div>
+      </li>
+    </cdk-virtual-scroll-viewport>
+  </ng-container>
+</div>

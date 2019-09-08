@@ -1,20 +1,6 @@
-import {
-  Component,
-  ViewChild,
-  OnInit,
-  OnDestroy,
-  ChangeDetectorRef
-} from "@angular/core";
+import { Component, ViewChild, OnInit, OnDestroy } from "@angular/core";
 import { CdkVirtualScrollViewport } from "@angular/cdk/scrolling";
-import { BehaviorSubject, Observable, Subscription } from "rxjs";
-import {
-  map,
-  tap,
-  scan,
-  mergeMap,
-  throttleTime,
-  switchMap
-} from "rxjs/operators";
+import { Subscription } from "rxjs";
 import { DashboardService } from "../services/dashboard.service";
 
 @Component({
@@ -27,18 +13,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   viewport: CdkVirtualScrollViewport;
   products = [];
   private sub: Subscription;
-  private limitSub: Subscription;
   limit = 20;
   offset = 0;
+  term;
+  sort = "updatedAt";
+  order = -1;
 
-  constructor(
-    private dashboardService: DashboardService,
-    private cd: ChangeDetectorRef
-  ) {}
-
-  ngAfterContentChecked() {}
+  constructor(private dashboardService: DashboardService) {}
 
   ngOnInit() {
+    this.dashboardService.resetProducts();
     this.sub = this.dashboardService.getProductListenerSub().subscribe(data => {
       this.products = [...data];
     });
@@ -51,28 +35,44 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.offset = offset;
     const end = this.viewport.getRenderedRange().end;
     const total = this.viewport.getDataLength();
-    this.dashboardService.getBatch(e, this.limit, this.offset, end, total);
+    this.dashboardService.getBatch(
+      e,
+      this.limit,
+      this.offset,
+      end,
+      total,
+      this.term,
+      this.sort,
+      this.order
+    );
   }
 
   searchList(e) {
-    this.products = this.dashboardService.search(e.target.value);
-  }
-
-  passFilter(term) {
-    return term.value;
+    this.term = e.target.value;
+    this.dashboardService.search(
+      this.offset,
+      this.limit,
+      this.term,
+      this.sort,
+      this.order
+    );
   }
 
   deleteProduct(id) {
-    console.log(this.products.length);
     this.dashboardService.remove(id);
-    if (this.products.length < 20) {
-      this.dashboardService.lessProducts(0, this.limit);
+    if (this.products.length <= 20) {
+      const limit = 20 - this.offset;
+      this.dashboardService.lessProducts(
+        this.offset,
+        limit,
+        this.term,
+        this.sort,
+        this.order
+      );
     }
-    // this.products = [...this.products];
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
-    this.limitSub.unsubscribe();
   }
 }

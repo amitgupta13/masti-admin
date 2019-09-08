@@ -1,18 +1,24 @@
 .form-submit-button {
-  background: linear-gradient(black, grey);
+  background: linear-gradient(45deg, black, transparent);
   color: #fff;
   border: 1px solid #eee;
   border-radius: 20px;
-  box-shadow: 2px 2px 2px #eee;
+  box-shadow: 2px 2px 2px linear-gradient(45deg, black, transparent);
   text-shadow: none;
 }
 
+.dash {
+  padding-top: 30px;
+  background-image: url("https://images8.alphacoders.com/601/thumb-1920-601994.jpg");
+  background-size: cover;
+}
+
 .form-submit-button:hover {
-  background: linear-gradient(grey, black);
+  background: linear-gradient(45deg, transparent, black);
   color: #fff;
   border: 1px solid #eee;
   border-radius: 20px;
-  box-shadow: 2px 2px 2px #eee;
+  box-shadow: 2px 2px 2px linear-gradient(45deg, transparent, black);
   text-shadow: none;
 }
 
@@ -58,6 +64,11 @@ li {
   position: relative;
 }
 
+li.animated.lightSpeedIn {
+  background: linear-gradient(45deg, black, transparent);
+  color: whitesmoke;
+}
+
 .test {
   right: 20px;
   position: absolute;
@@ -65,7 +76,7 @@ li {
 }
 
 input {
-  background: black;
+  background: linear-gradient(45deg, black, transparent);
   box-shadow: 2px 2px 2px #eee;
   border-radius: 20px;
   color: white;
@@ -74,8 +85,8 @@ input {
 }
 
 input:focus {
-  background: black;
-  box-shadow: 2px 2px 2px #eee;
+  background: linear-gradient(45deg, black, transparent);
+  box-shadow: 2px 2px 2px linear-gradient(45deg, black, transparent);
   color: white;
 }
 

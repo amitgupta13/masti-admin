@@ -1,0 +1,74 @@
+<div id="batman" class="jumbotron vertical-center">
+  <h1>{{ heading }}</h1>
+  <form
+    class="container col-md-10 col-sm-7 col-8"
+    [formGroup]="newProduct"
+    (ngSubmit)="onSubmit()"
+  >
+    <!-- <div class="form-group"> -->
+    <small class="text-danger" role="alert">{{ error }}</small>
+    <!-- </div> -->
+    <div class="form-group">
+      <label for="exampleInputEmail1">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        placeholder="Name"
+        formControlName="name"
+        autocomplete="off"
+      />
+      <small
+        class="text-danger"
+        *ngIf="
+          newProduct.get('name').errors?.required &&
+          newProduct.get('name').touched
+        "
+      >
+        This field is required
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Description</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputPassword1"
+        placeholder="Description"
+        formControlName="description"
+      />
+      <small
+        class="text-danger"
+        *ngIf="
+          newProduct.get('description').errors?.required &&
+          newProduct.get('description').touched
+        "
+      >
+        This field is required
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Price</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputPassword1"
+        placeholder="Price"
+        formControlName="price"
+      />
+      <small
+        class="text-danger"
+        *ngIf="
+          newProduct.get('price').errors?.required &&
+          newProduct.get('price').touched
+        "
+      >
+        This field is required
+      </small>
+    </div>
+    <button type="submit" class="btn btn-primary form-submit-button">
+      Submit
+    </button>
+  </form>
+</div>

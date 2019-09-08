@@ -1,19 +1,19 @@
 import { NgModule } from "@angular/core";
 import { DashboardComponent } from "./dashboard.component";
 import { CommonModule } from "@angular/common";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { DashboardRoutingModule } from "./dashboard-routing.module";
-import { ProductItemComponent } from "./product-item/product-item.component";
-import { FilterPipe } from "../pipes/filter.pipe";
+import { NewProductComponent } from "./new-product/new-product.component";
 
 @NgModule({
-  declarations: [DashboardComponent, ProductItemComponent, FilterPipe],
+  declarations: [DashboardComponent, NewProductComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     DashboardRoutingModule,
-    ScrollingModule
+    ScrollingModule,
+    FormsModule
   ]
 })
 export class DashboardModule {}

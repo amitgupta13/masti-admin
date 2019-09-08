@@ -15,8 +15,8 @@ export class DashboardService {
 
   getProducts(offset?, limit?, term?, sort?, order?) {
     term = term ? term : "";
-    sort = sort ? sort : "name";
-    order = order ? order : 1;
+    sort = sort ? sort : "createdAt";
+    order = order ? order : -1;
     offset = offset ? offset : 0;
     limit = limit ? limit : 20;
     return this.http
@@ -26,6 +26,34 @@ export class DashboardService {
       .pipe(throttleTime(500));
   }
 
+  getProduct(id) {
+    return this.http.get<any>(`${BACKEND_URL}/${id}`);
+  }
+
+  editProduct(id, data) {
+    return this.http.put(`${BACKEND_URL}/${id}`, { ...data });
+  }
+
+  addProduct(data) {
+    return this.http.post(`${BACKEND_URL}`, data);
+  }
+
+  resetProducts(offset?, limit?, term?, sort?, order?) {
+    term = term ? term : "";
+    sort = sort ? sort : "createdAt";
+    order = order ? order : -1;
+    offset = offset ? offset : 0;
+    limit = limit ? limit : 20;
+    return this.http
+      .get<any>(
+        `${BACKEND_URL}?skip=${offset}&limit=${limit}&search=${term}&order=${order}&sort=${sort}`
+      )
+      .subscribe(data => {
+        this.products = data;
+        this.productsChanged.next(this.products.slice());
+      });
+  }
+
   lessProducts(offset?, limit?, term?, sort?, order?) {
     this.getProducts(offset, limit, term, sort, order).subscribe(data => {
       this.products = [...data];
@@ -33,13 +61,13 @@ export class DashboardService {
     });
   }
 
-  getBatch(e, limit, offset, end, total) {
+  getBatch(e, limit, offset, end, total, term?, sort?, order?) {
     if (this.theEnd) {
       return;
     }
     console.log(`${end}, '>=', ${total}`);
     if (end === total) {
-      this.getProducts(offset, limit).subscribe(data => {
+      this.getProducts(offset, limit, term, sort, order).subscribe(data => {
         if (!data.length) {
           this.theEnd = true;
         }
@@ -59,9 +87,10 @@ export class DashboardService {
     return this.productsChanged.asObservable();
   }
 
-  search(search) {
-    return this.products.filter(obj => {
-      return obj.name.toLowerCase().indexOf(search) >= 0;
+  search(offset?, limit?, term?, sort?, order?) {
+    this.getProducts(offset, limit, term, sort, order).subscribe(data => {
+      this.products = data;
+      this.productsChanged.next(this.products.slice());
     });
   }
 
@@ -77,6 +106,5 @@ export class DashboardService {
           console.log({ err });
         }
       );
-    // return this.products;
   }
 }
